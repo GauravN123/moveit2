@@ -7,7 +7,7 @@ ROS 2 provides similar macros (i.e. `RCLCPP_INFO`) that instead of an optional n
 All source files that use ROS logging should now define a file-specific `static const rclcpp::Logger` named `LOGGER`, located at the top of the file and inside the namespace with the narrowest scope (if there is one).
 This leads to the following basic migration steps:
 
-1. Replace `LOGNAME` with `rclcpp::Logger` instance:
+1.  Replace `LOGNAME` with `rclcpp::Logger` instance:
 
     <b>Old:</b>
 
@@ -17,15 +17,15 @@ This leads to the following basic migration steps:
 
         static const rclcpp::Logger LOGGER = rclcpp::get_logger("logger_name");
 
-2. Replace logging macros:
+2.  Replace logging macros:
 
     <b>Old:</b>
 
-        ROS_INFO_NAMED(LOGNAME, "Very important info message");
+         ROS_INFO_NAMED(LOGNAME, "Very important info message");
 
-   <b>New:</b>
+    <b>New:</b>
 
-       RCLCPP_INFO(LOGGER, "Very important info message");
+        RCLCPP_INFO(LOGGER, "Very important info message");
 
 ### Logger naming convention
 
@@ -38,7 +38,7 @@ For instance, the file `joint_model_group.cpp` inside the library `moveit_robot_
 For finding the `LIBRARY_NAME` refer to the line `set(MOVEIT_LIB_NAME LIBRARY_NAME)` at the top of the library's `CMakeLists.txt`.
 If the source file name is the same or very similar to the library name it is sufficient to only use the source file name.
 
-### Logging in header files
+###### Logging in header files
 
 Some classes declared in header files may contain log messages, for instance to warn about not-implemented virtual functions in abstract classes.
 A logger defined in the header file would not tell us what derived class is missing the implementation, since the source name would be resolved from the header file.
